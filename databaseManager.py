@@ -15,8 +15,8 @@ class DatabaseManager:
         self.db_curr = self.cnx.cursor(dictionary=True)
         self.db_name = database
         self.queries = {
-            "Identify peak ordering times and locations": "SELECT HOUR(order_date) AS order_hour, COUNT(*) AS total_orders FROM Orders GROUP BY order_hour ORDER BY total_orders DESC;",
-            "Track delayed and canceled deliveries": "SELECT order_id, delivery_status, estimated_time, delivery_time FROM Deliveries WHERE delivery_status IN ('Delayed', 'Canceled');",
+            "Identify peak ordering hours": "SELECT HOUR(order_date) AS order_hour, COUNT(*) AS total_orders FROM Orders GROUP BY order_hour ORDER BY total_orders DESC;",
+            "Track delayed and canceled deliveries": "SELECT order_id, delivery_status, estimated_time, delivery_time FROM Deliveries WHERE delivery_status IN ('Delayed', 'Cancelled');",
             "Analyze customer preferences and order patterns": "SELECT preferred_cuisine, COUNT(*) AS total_orders FROM Customers JOIN Orders ON Customers.customer_id = Orders.customer_id GROUP BY preferred_cuisine ORDER BY total_orders DESC;",
             "Evaluate most popular restaurants and cuisines": "SELECT name, cuisine_type, total_orders FROM Restaurants ORDER BY total_orders DESC LIMIT 10;",
             "customers with highest order frequency": "SELECT name, total_orders FROM Customers ORDER BY total_orders DESC LIMIT 10;",
